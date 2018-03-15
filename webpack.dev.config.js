@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     "platzi-video": path.resolve(__dirname, 'index.js'),
+    // "practica-km": path.resolve(__dirname, 'practica.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
