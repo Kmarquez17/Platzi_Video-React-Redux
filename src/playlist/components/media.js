@@ -2,37 +2,13 @@ import React, { /*Component*/ PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import './media.css'
 class Media extends PureComponent{
-  state = {
-    author: ''
-  }
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     author: props.author,
-  //   }
-  //   //(this.handleClick contexto del DOM).(bind(this) contexto de la clase)
-  //   //this.handleClick = this.handleClick.bind(this)
+  // state = {
+  //   author: ''
   // }
-
-  handleClick = () => {
-      //console.log(this.props.title);
-      this.setState({
-        author: 'Ricardo Celis',
-      })
-  }
-
   render(){
-    // const styles = {
-    //   container:{
-    //     color: '#44546b',
-    //     cursor:'pointer',
-    //     width: 260,
-    //     border: '1px solid red'
-    //   }
-    // }
     return (
       //La propiedad className es igual al atributo class en html, aqui cambia ya que el lenguaje cambia.
-      <div className="Media" onClick={this.handleClick}>
+      <div className="Media" onClick={this.props.handleClick}>
         <div className="Media-cover">
           <img
             src={this.props.cover}

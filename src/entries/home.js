@@ -5,6 +5,6 @@ import Home from '../pages/containers/home'
 // import Playlist from './src/playlist/components/playlist.js'
 import data from '../api.json';
 
-const app = document.getElementById('app')
+const homeContainer = document.getElementById('home-container')
 //ReactDom.render(que voy a renderizar (sintaxis html)y donde se hara(body en el html))
-render( <Home data={data} />, app);
+render( <Home data={data} />, homeContainer);
