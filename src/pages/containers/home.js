@@ -6,6 +6,8 @@ import Categories from '../../categories/components/categories'
 import Related from '../components/related'
 import ModalContainer from '../../widgets/containers/modal'
 import Modal from '../../widgets/components/modal'
+import HandleError from '../../error/containers/handle-error'
+
 
 class Home extends Component{
   //estados
@@ -26,6 +28,7 @@ class Home extends Component{
   }
   render(){
     return(
+      <HandleError>
         <HomeLayout>
           <Related/>
           <Categories
@@ -43,6 +46,8 @@ class Home extends Component{
             </ModalContainer>
           }
         </HomeLayout>
+      </HandleError>
+
     )
   }
 }
