@@ -5,11 +5,10 @@ class Video extends Component {
       return(
         <div className="Video">
             <video
-            autoPlay={this.props.autoplay}
-            src={this.props.src}
+              autoPlay={this.props.autoplay}
+              src={this.props.src}
             />
         </div>
-
       )
     }
 }
