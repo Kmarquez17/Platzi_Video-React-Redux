@@ -7,7 +7,8 @@ import Related from '../components/related'
 import ModalContainer from '../../widgets/containers/modal'
 import Modal from '../../widgets/components/modal'
 import HandleError from '../../error/containers/handle-error'
-import VideoPlayerLayout from '../../player/containers/video-player'
+import VideoPlayer from '../../player/containers/video-player'
+
 
 class Home extends Component{
   //estados
@@ -31,7 +32,9 @@ class Home extends Component{
       <HandleError>
         <HomeLayout>
           <Related/>
-          <VideoPlayerLayout/>
+          <VideoPlayer
+              autoplay
+          />
           <Categories
             categories={this.props.data.categories}
             handleOpenModal={this.handleOpenModal}//Aqui no va el props por que le mando el evento
@@ -43,6 +46,7 @@ class Home extends Component{
                 handleClick={this.handleCloseModal}
               >
                 <h1>Esto es un portal</h1>
+
               </Modal>
             </ModalContainer>
           }
