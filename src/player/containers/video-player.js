@@ -9,6 +9,7 @@ import FormateTime from '../components/formateTime'
 import ProgressBar from '../components/progress-bar'
 import Spinner from '../components/spinner'
 import Volumen from '../components/volumen'
+import FullScreen from '../components/fullscreen'
 
 class VideoPlayer extends Component {
 state={
@@ -64,9 +65,25 @@ handleSeeked = event =>{
 handleVolumenChange = event => {
   this.video.volume = event.target.value
 }
+
+handleFullScreenClick = event => {
+    if (!document.webkitIsFullScreen) {
+      // mando a full screen
+      this.player.webkitRequestFullscreen()
+    } else {
+      document.webkitExitFullscreen();
+      // salgo del full screen
+    }
+  }
+
+setRef = element => {
+  this.player = element
+}
   render(){
     return(
-      <VideoPlayerLayout>
+      <VideoPlayerLayout
+          setRef={this.setRef}
+      >
         <Title
           title="Hola Mundo"
         />
@@ -86,6 +103,9 @@ handleVolumenChange = event => {
           />
           <Volumen
             handleVolumenChange={this.handleVolumenChange}
+          />
+          <FullScreen
+            handleFullScreenClick={this.handleFullScreenClick}
           />
         </Controls>
         <Spinner
