@@ -85,7 +85,7 @@ setRef = element => {
           setRef={this.setRef}
       >
         <Title
-          title="Hola Mundo"
+          title={this.props.title}
         />
         <Controls>
           <PlayPause
@@ -118,7 +118,7 @@ setRef = element => {
           handleTimeUpdate={this.handleTimeUpdate}
           handleSeeking={this.handleSeeking}
           handleSeeked={this.handleSeeked}
-          src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+          src={this.props.src}
        />
     </VideoPlayerLayout>
     )

@@ -5,10 +5,14 @@ class Media extends PureComponent{
   // state = {
   //   author: ''
   // }
+
+  handleClick = (event) => {
+    this.props.openModal(this.props)
+  }
   render(){
     return (
       //La propiedad className es igual al atributo class en html, aqui cambia ya que el lenguaje cambia.
-      <div className="Media" onClick={this.props.handleClick}>
+      <div className="Media" onClick={this.handleClick}>
         <div className="Media-cover">
           <img
             src={this.props.cover}
