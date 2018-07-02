@@ -1,5 +1,5 @@
 
-import {createStore} from 'redux'
+import { createStore } from 'redux'
 // Store = Es la parte más importante de entender cuando estamos haciendo algo en Redux.
 
 // Datos importantes del Store:
@@ -12,13 +12,13 @@ import {createStore} from 'redux'
 
 const initialState = [
     {
-        "title":"Despacito"
+        "title": "Despacito"
     },
     {
-        "title":"One more time"
+        "title": "One more time"
     },
     {
-        "title":"Echame la culpa"
+        "title": "Echame la culpa"
     },
 ]
 
@@ -26,10 +26,10 @@ const initialState = [
 // PreloadState / InitialState => Es el estado inicial de la aplicación, la primera carga, el llamado a una data. Puede ser cualquier tipo de dato.
 // Enhancer => Función que puede extender redux con capacidades añadidas por librerías externas. Es opcional. Eg. Añadir las dev-tools
 
-const reducer = function(state,action){
-    switch(action.type){
+const reducer = function (state, action) {
+    switch (action.type) {
         case 'ADD_SONG':
-            return [...state,action.payload]
+            return [...state, action.payload]
         default:
             return state
     }
@@ -42,27 +42,35 @@ const store = createStore(
 )
 
 const form = document.getElementById('form')
-const container = document.getElementById('playlist')
-const playlist = store.getState()
 
-playlist.forEach((item) => {
-    const template = document.createElement('p')
-    template.textContent = item.title
+function render (){
+    const container = document.getElementById('playlist')
+    const playlist = store.getState()
+    container.innerHTML= " "
+    playlist.forEach((item) => {
+        const template = document.createElement('p')
+        template.textContent = item.title
 
-    container.appendChild(template)
-});
+        container.appendChild(template)
+    });
+}
+    render()
+function handleChange() {
+    render()
+}
+store.subscribe(handleChange)
 
 form.addEventListener('submit', handleSubmit)
 
-function handleSubmit(e){
+function handleSubmit(e) {
     e.preventDefault()
     const data = new FormData(form)
     const title = data.get('title')
     console.log(title)
 
     store.dispatch({
-        type :'ADD_SONG',
-        payload : {
+        type: 'ADD_SONG',
+        payload: {
             title,
         },
     })
