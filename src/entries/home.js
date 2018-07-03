@@ -5,31 +5,32 @@ import Home from '../pages/containers/home'
 // import Playlist from './src/playlist/components/playlist.js'
 import data from '../api.json';
 import {Provider} from 'react-redux'
+import reducer from '../reducers/data'
 
 import {createStore} from 'redux'
 
 const initialState = {
     data:{
-        ...data
-    }
+        ...data,
+    },
+    search: []
 }
 
 const store = createStore(
-    (state) => state,
+    reducer,
     initialState,
-    //reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // Enhancer
 )
 
 console.log(store.getState())
 
 const homeContainer = document.getElementById('home-container')
-//ReactDom.render(que voy a renderizar (sintaxis html)y donde se hara(body en el html))
 
 
 render( 
+    //Un Provider es un componente de orden superior que sirve para heredar elementos a los componentes hijos.
 <Provider store={store}>
-    {/* <Home/>         */}
-    <p>Hoola Kevin Márquez</p> 
+    <Home/>        
+    {/* <p>Hoola Kevin Márquez</p>  */}
 </Provider>
 , homeContainer);

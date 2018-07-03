@@ -8,7 +8,7 @@ import ModalContainer from '../../widgets/containers/modal'
 import Modal from '../../widgets/components/modal'
 import HandleError from '../../error/containers/handle-error'
 import VideoPlayer from '../../player/containers/video-player'
-
+import { connect } from 'react-redux'
 
 class Home extends Component{
   //estados
@@ -34,8 +34,9 @@ class Home extends Component{
         <HomeLayout>
           <Related/>
           <Categories
-            categories={this.props.data.categories}
+            categories={this.props.categories}
             handleOpenModal={this.handleOpenModal}//Aqui no va el props por que le mando el evento
+            search={this.props.search}
           />
           {
             this.state.modalVisible &&
@@ -57,4 +58,13 @@ class Home extends Component{
     )
   }
 }
-export default Home
+
+function mapStateToProps(state,props){
+  return {
+    categories: state.data.categories,
+    search: state.search
+  }
+}
+
+// mapStateToProps es una función que devuelve las propiedades necesarias, los datos que el componente utilizará
+export default connect(mapStateToProps)(Home)
