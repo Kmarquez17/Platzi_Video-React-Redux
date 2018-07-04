@@ -4,14 +4,18 @@ import Home from '../pages/containers/home'
 //A la hora de importar un Componente tienen que ir en Mayuscula igual al componente de referencia.
 // import Playlist from './src/playlist/components/playlist.js'
 import data from '../api.json';
+import data2 from '../schema/index'
 import {Provider} from 'react-redux'
 import reducer from '../reducers/data'
+console.log(data2);
 
 import {createStore} from 'redux'
 
 const initialState = {
     data:{
         ...data,
+        // entities: data.entities,
+        // categories: data.result.categories
     },
     search: []
 }
