@@ -1,4 +1,13 @@
-function data(state, action) {
+import { fromJS } from 'immutable'
+import schema from '../schema/index'
+
+const initialState = fromJS({
+        entities: schema.entities,
+        categories: schema.result.categories,
+        search: []
+})
+
+function data(state = initialState, action) {
     switch (action.type) {
         case 'SEARCH_VIDEO': {
             // action.payload.query

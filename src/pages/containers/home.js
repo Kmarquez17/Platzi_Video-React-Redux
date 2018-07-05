@@ -58,16 +58,18 @@ class Home extends Component{
     )
   }
 }
-
-function mapStateToProps(state,props){
-  // const categories = state.data.categories.map((categoryId) => {
-  //   return state.data.entities.categories[categoryId]
-  // })
+function mapStateToProps(state, props) {
+  // state: el state trae el estado inicial de la aplicacion (la cual pueden venir de los reducers)
+  // props: los props de aqui funcionan igual que los demas componentes
+  const categories = state.get('data').get('categories').map((categoryId) => {
+    return state.get('data').get('entities').get('categories').get(categoryId)
+  })
 
   return {
-    categories: state.data.categories,
-    search: state.search
+    categories: categories,
+    search: state.get('data').get('search')
   }
+
 }
 
 // mapStateToProps es una función que devuelve las propiedades necesarias, los datos que el componente utilizará
