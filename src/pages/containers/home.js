@@ -9,24 +9,27 @@ import Modal from '../../widgets/components/modal'
 import HandleError from '../../error/containers/handle-error'
 import VideoPlayer from '../../player/containers/video-player'
 import { connect } from 'react-redux'
-
+import {List as list} from 'immutable'
+import {openModal,closeModal} from '../../actions/index'
 class Home extends Component{
   //estados
   state = {
     modalVisible:false,
   }
   //Abre Modal
-  handleOpenModal = (media) => {
-    this.setState({
-      modalVisible:true,
-      media
-    })
+  handleOpenModal = (id) => {
+    // this.setState({
+    //   modalVisible:true,
+    //   media
+    // })
+    this.props.dispatch(openModal(id))
   }
   //Cierra Modal
   handleCloseModal = (event) => {
-    this.setState({
-      modalVisible:false,
-    })
+    // this.setState({
+    //   modalVisible:false,
+    // })
+    this.props.dispatch(closeModal())
   }
   render(){
     return(
@@ -39,15 +42,14 @@ class Home extends Component{
             search={this.props.search}
           />
           {
-            this.state.modalVisible &&
+            this.props.modal.get('visibility') &&
             <ModalContainer>
               <Modal
                 handleClick={this.handleCloseModal}
               >
                 <VideoPlayer
                     autoplay
-                    src={this.state.media.src}
-                    title={this.state.media.title}
+                    id={this.props.modal.get('mediaId')}
                 />
               </Modal>
             </ModalContainer>
@@ -58,19 +60,25 @@ class Home extends Component{
     )
   }
 }
+
 function mapStateToProps(state, props) {
-  // state: el state trae el estado inicial de la aplicacion (la cual pueden venir de los reducers)
-  // props: los props de aqui funcionan igual que los demas componentes
   const categories = state.get('data').get('categories').map((categoryId) => {
     return state.get('data').get('entities').get('categories').get(categoryId)
   })
-
+  let searchResults = list()
+  const search = state.get('data').get('search');
+  if (search) {
+    const mediaList = state.get('data').get('entities').get('media');
+    searchResults = mediaList.filter((item) => (
+      item.get('author').toLowerCase().includes(search.toLowerCase())
+    )).toList();
+  }
   return {
     categories: categories,
-    search: state.get('data').get('search')
+    search: searchResults,
+    modal: state.get('modal')
   }
 
 }
 
-// mapStateToProps es una función que devuelve las propiedades necesarias, los datos que el componente utilizará
 export default connect(mapStateToProps)(Home)
