@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Media from '../components/media';
 import { connect } from 'react-redux';
-import  * as actions from '../../actions/index'
-import {bindActionCreators} from 'redux'
+import * as actions from '../../actions/index'
+import { bindActionCreators } from 'redux'
 
 
 class MediaContainer extends Component {
@@ -20,10 +20,10 @@ function mapStateToProps(state, props) {
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return{
-    actions: bindActionCreators (actions, dispatch)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(MediaContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(MediaContainer)

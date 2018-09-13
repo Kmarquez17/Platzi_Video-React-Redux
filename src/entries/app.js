@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
-import Home from '../pages/containers/home';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from '../reducers/index';
+import reducer from '../reducers';
 import { Map as map } from 'immutable';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+
+import Home from '../pages/components/home';
+import Videos from '../pages/containers/videos';
+import Header from '../pages/components/header';
+import NotFound from '../pages/components/not-found'
+
 // ----- versión pre-ES6
 // function logger({getState,dispatch}){
 //   return (next) => {
@@ -47,7 +53,19 @@ const homeContainer = document.getElementById('home-container')
 // const holaMundo = <h1>hola Estudiante!</h1>;
 
 render(
-  <Provider store={store}>
-    <Home />
-  </Provider>
-, homeContainer);
+  <BrowserRouter
+  // basename='/videos'
+  >
+    <Provider store={store}>
+      <Fragment>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/videos" component={Videos} />
+          <Redirect from="/v" to="/videos" />
+          <Route component={NotFound} />
+        </Switch>
+      </Fragment>
+    </Provider>
+  </BrowserRouter>
+  , homeContainer);

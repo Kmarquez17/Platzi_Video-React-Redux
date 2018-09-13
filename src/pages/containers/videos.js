@@ -10,7 +10,7 @@ import HandleError from '../../error/containers/handle-error'
 import VideoPlayer from '../../player/containers/video-player'
 import { connect } from 'react-redux'
 import {List as list} from 'immutable'
-import  * as actions from '../../actions/index'
+import  * as actions from '../../actions'
 
 import {bindActionCreators} from 'redux'
 
