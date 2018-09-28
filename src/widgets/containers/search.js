@@ -1,18 +1,19 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Search from '../components/search'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from '../../actions/index'
 
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 
-class SearchContainer extends Component{
+class SearchContainer extends Component {
   state = {
-    value:'Kevin Marquez'
+    value: '',
+    prompt: false,
   }
   handleSubmit = event => {
     event.preventDefault()
-    console.log(this.input.value,'submit');
-    
+    console.log(this.input.value, 'submit');
+
     this.props.actions.searchAsyncEntities(this.input.value)
   }
 
@@ -22,24 +23,26 @@ class SearchContainer extends Component{
 
   handleInputChange = event => {
     this.setState({
-      value: event.target.value.replace(' ', '-')
+      value: event.target.value.replace(' ', '-'),
+      prompt: !!(event.target.value.length),
     })
   }
-  render(){
-    return(
+  render() {
+    return (
       <Search
-        setRef = {this.setInputRef}
-        handleSubmit = {this.handleSubmit}
-        handleChange = {this.handleInputChange}
+        setRef={this.setInputRef}
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleInputChange}
         value={this.state.value}
+        prompt={this.state.prompt}
       />
     )
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return{
-    actions: bindActionCreators (actions, dispatch)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
   }
 }
 export default connect(null, mapDispatchToProps)(SearchContainer)

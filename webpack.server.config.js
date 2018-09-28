@@ -18,18 +18,20 @@ module.exports = (env) => {
 
     entry: {
       //"platzi-video": path.resolve(__dirname, 'index.js'),
-      "app": path.resolve(__dirname, 'src/entries/app.js'),
+      "app": path.resolve(__dirname, 'src/pages/containers/app.js'),
       // "redux": path.resolve(__dirname, 'src/entries/redux.js'),
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'js/[name].js',
-      publicPath: "/",
+      filename: 'ssr/[name].js',
+      publicPath:"/",
       chunkFilename: 'js/[id].[chunkhash].js',
+      libraryTarget:'commonjs2',
     },
     devServer: {
       port: 9000,
     },
+    target: 'node',
     module: {
       rules: [
         {
